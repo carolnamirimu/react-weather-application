@@ -7,7 +7,7 @@ function App() {
       <div className='container'>
       <header className="App-header">
 <Weather defaultcity="Gulu"/>
-       <footer>
+       <footer className='mt-3'>
         <p> This Application was coded by Namirimu Carol and its
           <a href='https://github.com/carolnamirimu/react-weather-application'> open source at Github </a>.
         </p>

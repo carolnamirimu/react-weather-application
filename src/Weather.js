@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios';
 import './Weather.css';
+import FormttedDate from "./FormattedDate";
 
  export default function Weather(props){
     const[weatherData, setWeatherData]=useState({ready:false});
@@ -10,7 +11,7 @@ import './Weather.css';
             ready:true,
             temperature:response.data.main.temp,
             humidity:response.data.main.humidity,
-            date:"Wednesday 07:00",
+            date:new Date(response.data.dt*1000),
             description: response.data.weather[0].description,
             iconUrl:"https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
             wind:response.data.wind.speed,
@@ -40,7 +41,7 @@ import './Weather.css';
     <div className="col-6">
         <ul>
             <li>
-                {weatherData.date}
+                <FormttedDate date={weatherData.date}/>
             </li>
             <li className="text-capitalize">
                 {weatherData.description}
@@ -65,7 +66,7 @@ import './Weather.css';
         </div>
                    );}
                      else{
-                        let apiKey = "62231151ce343c4d68652e1617efc22f";
+                        let apiKey = "5293d8454b519c30f6f6331f38c85b4c";
                         let city ="Kampala";
                         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultcity}&appid=${apiKey}&units=metric`;
                         
