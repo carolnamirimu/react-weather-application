@@ -1,6 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from 'axios';
 import './Weather.css';
+
  function Weather(){
+    const[weatherData, setWeatherData]=useState({ready:false});
+    function displayWeather(response){
+        console.log(response.data);
+        setWeatherData({
+            temperature:response.data.main.temp,
+            hunmidity:response.data.main.humidity,
+            date:"Wednesday 07:00",
+            description: response.data.weather[0].description,
+            iconUrl:"https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+            wind:response.data.wind.speed,
+            city:response.data.name
+        });
+    }
+    let apiKey = "094780c710fa4efd669f0df8c3991927";
+    let city ="Kampala";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
     return(
         <div className="Weather mt-5 p-3">
             <form>
@@ -19,10 +38,10 @@ import './Weather.css';
     <div className="col-6">
         <ul>
             <li>
-                Tuesday 7/2023
+                {weatherData.date}
             </li>
-            <li>
-                Partly Cloudy
+            <li className="text-capitalise">
+                {weatherData.description}
             </li>
         </ul>
     </div>
@@ -32,17 +51,16 @@ import './Weather.css';
                 Presipitation: 15%
             </li>
             <li>
-                Humidity: 75%
+                Humidity: {weatherData.humidity} %
             </li>
             <li>
-                Wind: 3Km/hr
+                Wind:{weatherData.wind} Km/hr
             </li>
         </ul>
     </div>
 </div>
 <div className="">
-    <img src="
-https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"/> <span className="temp">20</span><span className="units">°C </span>
+    <img src={weatherData.iconUrl} alt={weatherData.description}/> <span className="temp">{weatherData.temperature}</span><span className="units">°C </span>
 </div>
         </div>
         );
