@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import axios from 'axios';
 import './Weather.css';
-import FormttedDate from "./FormattedDate";
+
+import WeatherInfo from "./WeatherInfo";
 
  export default function Weather(props){
     const[weatherData, setWeatherData]=useState({ready:false});
@@ -36,38 +37,12 @@ import FormttedDate from "./FormattedDate";
                  </div>
                
             </form>
-<h1>{weatherData.city}</h1>
-<div className="row">
-    <div className="col-6">
-        <ul>
-            <li>
-                <FormttedDate date={weatherData.date}/>
-            </li>
-            <li className="text-capitalize">
-                {weatherData.description}
-            </li>
-        </ul>
-    </div>
-    <div className="col-6">
-        <ul>
-        
-            <li>
-                Humidity: {weatherData.humidity} %
-            </li>
-            <li>
-                Wind:{weatherData.wind} Km/hr
-            </li>
-        </ul>
-    </div>
-</div>
-<div className="">
-    <img src={weatherData.iconUrl} alt={weatherData.description}/> <span className="temp">{Math.round(weatherData.temperature)}</span><span className="units">°C </span>
-</div>
+            <WeatherInfo data={weatherData}/>
+
         </div>
                    );}
                      else{
-                        let apiKey = "5293d8454b519c30f6f6331f38c85b4c";
-                        let city ="Kampala";
+                        let apiKey = "9eca7aac0b071aa16e3cb063adba0785";
                         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultcity}&appid=${apiKey}&units=metric`;
                         
                         axios.get(apiUrl).then(displayWeather);
