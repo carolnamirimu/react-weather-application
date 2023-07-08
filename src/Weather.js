@@ -6,6 +6,7 @@ import WeatherInfo from "./WeatherInfo";
 
  export default function Weather(props){
     const[weatherData, setWeatherData]=useState({ready:false});
+    const[city, setCity]= useState(props.defaultcity);
     function displayWeather(response){
         console.log(response.data);
         setWeatherData({
@@ -20,19 +21,34 @@ import WeatherInfo from "./WeatherInfo";
         });
 
     }
-    
+    function search(){
+        let apiKey = "f8e6a9e3d6fde87cb38868da460b1371";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        
+        axios.get(apiUrl).then(displayWeather); 
+    }
+    function handleSumit(event){
+        event.preventDefault();
+        search();
+    }
+    function handleCityChnage(event){
+        setCity(event.target.value);
+
+    }
     if(weatherData.ready){
     return(
         <div className="Weather mt-5 p-3">
             
-            <form>
+            <form onSubmit={handleSumit}>
                 <div className="row">
                     <div className="col-6">
                 <input type="search" placeholder="Enter City..."
-                className="Form"/>
+                className="Form"
+                autoFocus="on"
+                onChange={handleCityChnage}/>
                 </div>
                 <div className="col-3">
-                 <button type="button" class="btn btn-primary">Search</button>
+                 <input class="btn btn-primary"type ="submit"/>
                  </div>
                  </div>
                
@@ -42,10 +58,7 @@ import WeatherInfo from "./WeatherInfo";
         </div>
                    );}
                      else{
-                        let apiKey = "9eca7aac0b071aa16e3cb063adba0785";
-                        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultcity}&appid=${apiKey}&units=metric`;
-                        
-                        axios.get(apiUrl).then(displayWeather);
-        
+                      
+        search();
                         return("Loading....");
                         }}
