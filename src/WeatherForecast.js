@@ -1,32 +1,49 @@
-import React from "react";
+import React,{useState} from "react";
 import axios from "axios";
 import "./Weatherforecast.css";
 export default function WeatherForecast(props){
     
+    let [loaded, setLoaded]=useState(false);
+    let [forecast, setForecast]=useState(null);
+
     function displayforecast(response){
-        console.log(response.data);
+      
+       setForecast(response.data.daily);
+       setLoaded(true);
     }
-    let apiKey = "f8e6a9e3d6fde87cb38868da460b1371";
-   let lon=props.coordinates.lon;
-    let lat=props.coordinates.lat;
-    let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
-    axios.get(apiUrl).then(displayforecast);
-
+if (loaded){
+    console.log(forecast);
     return (
-        <div className="WeatherForcast">
+        <div className="WeatherForecast">
 <div className="row">
     <div className="col">
-<div>Thur</div>
-<div> <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="Logo" />;
-</div> <div></div>
+<div>{forecast[0].dt}</div>
 <div>
-    <span className="maxtemperatuer">23°</span>
-    <span className="mintemperatuer"> 20°</span>
+    <br/>
+     <span>
+        <img src={forecast[0].weather[0].icon} alt={forecast[0].weather[0].description}/>  
+     </span>;
+</div> 
+<div>
+    <span className="maxtemperatuer"> {Math.round(forecast[0].temp.max)}°</span>
+    <span className="mintemperatuer"> {Math.round(forecast[0].temp.min)}°</span>
+   
 </div>
     </div>
 
 </div>
         </div>
-    )
+        
+    );
 }
+else {
+        let apiKey = "3c949ba49d38be2487ee278e0d2d4059";
+        let lon=props. coordinates.lon;
+         let lat=props.coordinates.lat;
+         let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+     
+         axios.get(apiUrl).then(displayforecast);
+         
+         return null;
+    }}

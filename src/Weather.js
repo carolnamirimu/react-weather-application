@@ -9,10 +9,11 @@ import WeatherInfo from "./WeatherInfo";
     const[weatherData, setWeatherData]=useState({ready:false});
     const[city, setCity]= useState(props.defaultcity);
     function displayWeather(response){
-        console.log(response.data);
+      
         setWeatherData({
-            coordinates:response.data.coord,
+           
             ready:true,
+            coordinates:response.data.coord,
             temperature:response.data.main.temp,
             humidity:response.data.main.humidity,
             date:new Date(response.data.dt*1000),
@@ -24,7 +25,7 @@ import WeatherInfo from "./WeatherInfo";
 
     }
     function search(){
-        let apiKey = "53f3bc1f5d348c44be3e3754c7185573";
+        let apiKey = "3c949ba49d38be2487ee278e0d2d4059";
         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
         
         axios.get(apiUrl).then(displayWeather); 
@@ -56,7 +57,7 @@ import WeatherInfo from "./WeatherInfo";
                
             </form>
             <WeatherInfo data={weatherData}/>
-            <WeatherForecast coordinates={weatherData.coordinates}/>
+            <WeatherForecast coordinates={weatherData. coordinates}/>
         </div>
                    );}
                      else{
