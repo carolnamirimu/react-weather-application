@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <div className='container'>
       <header className="App-header">
-<Weather defaultcity="Entebbe"/>
+<Weather defaultcity="london"/>
        <footer className='mt-3'>
         <p> This App was coded by <a href='https://www.linkedin.com/in/carol-namirimu-50b660127/'target='blank'>Namirimu Carol</a> and its
           <a href='https://github.com/carolnamirimu/react-weather-application'target='blank'> open source at Github </a> and <a href='https://eclectic-dragon-0a6d0f.netlify.app/'target='blank'>hosted on netlify</a>.

@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import axios from "axios";
 import "./Weatherforecast.css";
+import Weatherforecastday from "./Weatherforecastday";
 export default function WeatherForecast(props){
     
     let [loaded, setLoaded]=useState(false);
@@ -13,31 +14,25 @@ export default function WeatherForecast(props){
     }
 
 if (loaded){
-    console.log(forecast);
     return (
         <div className="WeatherForecast">
 <div className="row">
-    <div className="col">
-<div>{forecast[0].dt}</div>
-<div>
-    <br/>
-     <span>
-        <img src={forecast[0].weather[0].icon} alt={forecast[0].weather[0].description}/>  
-     </span>
-</div> 
-<div>
-    <span className="maxtemperatuer"> {Math.round(forecast[0].temp.max)}°</span>
-    <span className="mintemperatuer"> {Math.round(forecast[0].temp.min)}°</span>
-   
-</div>
+{forecast.map(function(dailyforecast,index)
+{if (index < 5){
+    return(
+        <div className="col" key={index}>
+        <Weatherforecastday data={dailyforecast}/>
     </div>
 
+    );
+}
+})}
+  
 </div>
         </div>
         
     );
 }
-else {
         let apiKey = "3c949ba49d38be2487ee278e0d2d4059";
         let lon=props.coordinates.lon;
          let lat=props.coordinates.lat;
@@ -46,4 +41,4 @@ else {
          axios.get(apiUrl).then(displayforecast);
          
          return null;
-    }}
+    }
