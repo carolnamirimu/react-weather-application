@@ -21,6 +21,7 @@ if (loaded){
     return (
         <div className="WeatherForecast">
 <div className="row">
+
 {forecast.map(function(dailyforecast,index)
 {if (index < 5){
     return(
@@ -29,6 +30,8 @@ if (loaded){
     </div>
 
     );
+}else{
+    return null;
 }
 })}
   
