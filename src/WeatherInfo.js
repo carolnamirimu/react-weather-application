@@ -31,7 +31,7 @@ export default function WeatherInfo(props){
         </ul>
     </div>
 </div>
-<div className="">
+<div>
     <img src={props.data.iconUrl} alt={props.data.description}/> 
     <WeatherTemperatuer celusius={props.data.temperature}/>
     

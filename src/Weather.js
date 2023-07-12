@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import WeatherForecast from "./WeatherForecast";
+
 import axios from 'axios';
 import './Weather.css';
 
@@ -51,13 +52,13 @@ import WeatherInfo from "./WeatherInfo";
                 onChange={handleCityChnage}/>
                 </div>
                 <div className="col-3">
-                 <input class="btn btn-primary"type ="submit"/>
+                 <input className="btn btn-primary"type ="submit"/>
                  </div>
                  </div>
                
             </form>
             <WeatherInfo data={weatherData}/>
-            <WeatherForecast coordinates={weatherData. coordinates}/>
+            <WeatherForecast coordinates={weatherData.coordinates}/>
         </div>
                    );}
                      else{

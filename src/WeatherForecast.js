@@ -23,7 +23,7 @@ if (loaded){
     <br/>
      <span>
         <img src={forecast[0].weather[0].icon} alt={forecast[0].weather[0].description}/>  
-     </span>;
+     </span>
 </div> 
 <div>
     <span className="maxtemperatuer"> {Math.round(forecast[0].temp.max)}°</span>
@@ -39,7 +39,7 @@ if (loaded){
 }
 else {
         let apiKey = "3c949ba49d38be2487ee278e0d2d4059";
-        let lon=props. coordinates.lon;
+        let lon=props.coordinates.lon;
          let lat=props.coordinates.lat;
          let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
      
